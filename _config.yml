@@ -7,4 +7,4 @@ include:
   - README.md
   - EARSeL2022/Part_II.Working_with_Spectral_Libraries.md
 
-theme: jekyll-theme-midnight
+theme: jekyll-theme-minimal
