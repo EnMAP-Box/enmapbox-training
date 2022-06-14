@@ -1,2 +1,4 @@
 # enmapbox-training
-A collection of exampled how to use the EnMAP-Box
+A repository with examples how to use the EnMAP-Box.
+
+
