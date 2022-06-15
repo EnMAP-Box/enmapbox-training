@@ -13,7 +13,9 @@ and it's "Spectral Profile" ![maptool_identify.png](img/maptool_identify.png) op
 5. Select other pixels to visualize their profiles
 
 - To save a temporary profile, click on the add profile button
-- To save each new profile, activate ![Add profiles automatically](img/add_profiles_automatically.png)
+- To save each profile immediately, activate "Add profiles automatically"
+
+![Add profiles automatically](img/add_profiles_automatically.png)
 
 ## A Spectral Library is a vector layer
 
