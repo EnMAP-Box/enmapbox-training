@@ -1,18 +1,35 @@
 # Part II: Working with Spectral Libraries
 
-Aim of this session is to learn how to use Spectral Libraries in the EnMAP-Box
+In this session you can learn how to use Spectral Libraries in the EnMAP-Box.
 
 
-## How to create a Spectral Library Window
+## Collect raster profiles in a Spectral Library Window
 
 1. Open the EnMAP-Box
 2. Open an EnMAP image / any other raster image
 3. Activate the "Identify map tool" ![maptool_identify_spectralprofiles.png](img/maptool_identify_spectralprofiles.png) 
 and it's "Spectral Profile" ![maptool_identify.png](img/maptool_identify.png) option 
 4. Click on a raster image pixel to collect a spectral profile and show it in a new spectral library window.
+5. Select other pixels to visualize their profiles
 
+- To save a temporary profile, click on the add profile button
+- To save each new profile, activate ![Add profiles automatically](img/add_profiles_automatically.png)
 
-## Collect profiles from raster images
+## A Spectral Library is a vector layer
+
+- you can add, modify and remove fields as known form other vector layers
+- spectral profiles are stored in binary or text field attributes
+
+1. Open the field calculator ![field calculator](img/field_calculator_icon.png)
+2. Create a new field text field "textprofile" with unlimited length
+3. Convert the binary encoded profile values into a JSON text string with the `encodeProfile` function:
+
+![create_text_profile_field.png](img/create_text_profile_field.png)
+
+## The Spectral Profile Plot
+
+1. Open the Plot Settings
+2. 
 
 
 
