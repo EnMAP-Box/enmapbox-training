@@ -89,7 +89,7 @@ In addition, the JSON object can described the "y" values by their position on a
 unit name of the "y" and "x" values and (for convenience with the ENVI format), bad band values:
 
 | member | content                                                                                    |
-|--------|--------------------------------------------------------------------------------------------|
+|--------|:-------------------------------------------------------------------------------------------|
 | y      | an array with n profile values                                                             |
 | x      | an array with n profile value locations, e.g. the band wavelengths                         |
 | yUnit  | string that describes the unit of y values, e.g. "Reflectance"                             |
