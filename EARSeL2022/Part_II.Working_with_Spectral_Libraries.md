@@ -1,6 +1,6 @@
 # Part II: Working with Spectral Libraries
 
-This tutorial shows you to use Spectral Libraries in the EnMAP-Box.
+This tutorial shows you how to use Spectral Libraries in the EnMAP-Box.
 
 
 ## Collect raster profiles in a Spectral Library Window
@@ -19,11 +19,12 @@ and it's "Spectral Profile" ![maptool_identify.png](img/maptool_identify.png) op
 
 ## A Spectral Library is a vector layer
 
-The EnMAP-Box stores spectral profiles on basis of QGIS Vector Layer
+The EnMAP-Box stores spectral profiles in vector Layer.
 
 - you can add, modify and remove fields as known from other vector layers.
 - spectral profiles are stored in binary or text field attributes
 - spectral profile fields are designated to a Spectral Profile editor widget 
+
 
 1. Open the Spectral Library properties
 2. 
@@ -38,8 +39,15 @@ Each vector layer can become a spectral library
 
 ## The Spectral Profile Plot
 
+The plot settings panel allows to customize how profiles will be plotted.
+You can define visualization groups that described how profiles from a specific field and with specific attributes
+should be visualized.
+
 1. Open the Plot Settings
-2. 
+2. Add a new visualization group
+3. Change the group's profile color and line style
+4. Change the group's profile source
+5. Limit the number of profiles using a filter expression 
 
 
 
