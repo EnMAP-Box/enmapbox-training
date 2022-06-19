@@ -1,6 +1,6 @@
 # Part II: Working with Spectral Libraries
 
-In this session you can learn how to use Spectral Libraries in the EnMAP-Box.
+This tutorial shows you to use Spectral Libraries in the EnMAP-Box.
 
 
 ## Collect raster profiles in a Spectral Library Window
@@ -19,12 +19,20 @@ and it's "Spectral Profile" ![maptool_identify.png](img/maptool_identify.png) op
 
 ## A Spectral Library is a vector layer
 
-- you can add, modify and remove fields as known form other vector layers
-- spectral profiles are stored in binary or text field attributes
+The EnMAP-Box stores spectral profiles on basis of QGIS Vector Layer
 
-1. Open the field calculator ![field calculator](img/field_calculator_icon.png)
-2. Create a new field text field "textprofile" with unlimited length
-3. Convert the binary encoded profile values into a JSON text string with the `encodeProfile` function:
+- you can add, modify and remove fields as known from other vector layers.
+- spectral profiles are stored in binary or text field attributes
+- spectral profile fields are designated to a Spectral Profile editor widget 
+
+1. Open the Spectral Library properties
+2. 
+3. Open the layer properties of the Spectral Library
+Each vector layer can become a spectral library
+
+4. Open the field calculator ![field calculator](img/field_calculator_icon.png)
+5. Create a new field text field "textprofile" with unlimited length
+6. Convert the binary encoded profile values into a JSON text string with the `encodeProfile` function:
 
 ![create_text_profile_field.png](img/create_text_profile_field.png)
 
