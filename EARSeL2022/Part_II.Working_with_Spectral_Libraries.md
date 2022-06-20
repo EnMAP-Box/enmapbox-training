@@ -1,19 +1,37 @@
 # Part II: Working with Spectral Libraries
 
-This tutorial shows you how to use Spectral Libraries in the EnMAP-Box.
+This tutorial shows example on how the EnMAP-Box can be used to manage Spectral Libraries.
+
+## Requirements:
+
+* QGIS 3.24+ 
+* EnMAP.Box 3.10.+
+
+Most exercises of this tutorial use the EnMAP-Box example data, which can be opened by
+*Project* > *Load Example Data*.
+
+![Load example data](img/enmapbox_load_exampledata.png)
+
+Some exercises use ASD Field Spectrometer binary files (*.asd), which are located 
+in this repository in ``enmapbox-training/EARSeL2022/Data_Part_II``. You can
+
+* cloning this repository ``git clone git@github.com:EnMAP-Box/enmapbox-training.git``, or
+* download it from https://github.com/EnMAP-Box/enmapbox-training/archive/refs/heads/main.zip
+
+It is furthermore recommended to disable other QGIS plugins.
+An easy way to do so is to create a new QGIS profile "enmap-box tutorial"
 
 
-## Collecting profiles from raster positions
+## 1. Collecting profiles
 
-### Identify and collect
 1. Open the EnMAP-Box
 2. Open an EnMAP image / any other raster image
 3. Activate the *Identify* map tool and it's option to collect *Profiles* 
-   ![img.png](speclib_identify_toolbar.png)
+   ![Indentify map tool bar](img/speclib_identify_toolbar.png)
 
 4. Click on a raster image pixel to open a new Spectral Library window and show the pixel profile.
 
-   ![img_2.png](speclib_profile_and_profile_location.png)
+   ![Example Pixel position and profile](img/speclib_profile_and_profile_location.png)
 
 5. Profiles obtained from pixel positions are considered as current or temporary *profile candidates*. 
    Each time you click on a new pixels position, the last candidate will be replaced by the next one.
@@ -21,31 +39,31 @@ This tutorial shows you how to use Spectral Libraries in the EnMAP-Box.
 6. Click on *Add profile(s)" to keep candidate profiles in the spectral library.
    You can activate "Add profiles automatically" to keep new profiles automatically
 
-   ![img_4.png](speclib_profiles_profilecandidates.png)
+   ![Profiles and Profile Candidates](img/speclib_profiles_profilecandidates.png)
  
 
-## Vector Layer as Spectral Library
+## 2. Profiles in Vector Layers?
 
-The EnMAP-Box stores spectral profiles in vector layers. This way you can save profile metadata in the same way 
-as in other vector datasets. This way we can describe
+The EnMAP-Box stores spectral profiles in vector layers. This way we can:
 
-* profile locations using geometries like points and polygons
-* profile metadata using different [field types](https://docs.qgis.org/3.22/en/docs/user_manual/managing_data_source/supported_data.html),
+* describe profile locations using geometries like points and polygons
+* describe profile metadata using different [field types](https://docs.qgis.org/3.22/en/docs/user_manual/managing_data_source/supported_data.html),
   for example for text and numeric data.
 * use QGIS specific features and constraints to ensure data consistency and integrity
 
-1. Open the *Layer properties* of the Spectral Library. Now have a look on different layer properties
+Open the *Layer properties* of the Spectral Library and have a look on 
+its different properties:
   - *Information*: Which data provider does this Spectral Library use?
-  - *Source*: Change the spectral library name to "MySpeclib"
+  - *Source*: Change the spectral library name to *MySpeclib*
   - *Fields*: Which data type is used for the *profiles* field? 
-  - *Attribute Form*: Which widget type is used for the *profiles field?
+  - *Attribute Form*: Which widget type is used for the *profiles* field?
 
 *Spectral Profiles* are stored in *binary* (BLOB) or *text* (VARCHAR) fields of unlimited length. 
 To use such fields for storing Spectral Profiles, the field editor 
 widget must be explicitly designated to the type *SpectralProfile*.
 
 
-![img_5.png](speclib_attribute_form.png)
+![Attriubte Form Properties](img/speclib_attribute_form.png)
 
 Being a vector layer, we can add the spectral library to a map canvas to display the 
 positions of collected pixel profiles.
@@ -54,9 +72,9 @@ positions of collected pixel profiles.
 2. Open a map canvas context menu
 3. Add "MySpeclib" as vector layer
 
-![img_6.png](speclib_mapcanvas_profilepositions.png) 
+![Example Map canvas and spectral profiles](img/speclib_mapcanvas_profilepositions.png) 
 
-## Profile sources and pixel locations
+## 3. Profile sources and pixel locations
 
 You may have recognized that, by default, the *Identify* tool selects profiles from top-most raster layer.
 This can be change in the *Spectral Profile Sources* panel, which allows you to define:
@@ -67,13 +85,13 @@ This can be change in the *Spectral Profile Sources* panel, which allows you to 
 * the scaling of profile value
 
 1. Change the profile source to *enmap_berlin.bsq*. This way you will always collect profiles from the same image.
-   ![img_11.png](speclib_profile_source_panel_enmap_berlin.png)
+   ![img_11.png](img/speclib_profile_source_panel_enmap_berlin.png)
 
 2. In addition, open the map context menu *Crosshair* > *Pixel grid* and select the *enmap_berlin.bsq*. 
 
-   ![img_11.png](speclib_crosshair_pixelgrid.png)
+   ![Crosshair Pixel Grid Menu](img/speclib_crosshair_pixelgrid.png)
 
-   ![img_11.png](speclib_crosshair_pixelgrid2.png)
+   ![Crosshair Pixel Grid Canvas](img/speclib_crosshair_pixelgrid2.png)
 
    Continue identifying pixel profiles by selecting locations using the *hires_berlin.bsq* as reference.
    As alternative to the mouse you can use the following short-cuts to identify pixel profiles:
@@ -86,120 +104,144 @@ This can be change in the *Spectral Profile Sources* panel, which allows you to 
 
 
 It is possible to collect and compare profiles from different raster sources at the same time.
-1. Add a second profile source relation ![](speclib_profile_source_panel_addrelation.png)
+1. Add a second profile source relation ![Green Plus icon](img/speclib_green_plus_icon.png)
 2. Use ```hires_berlin.bsq``` as profile source and identify a profile for both images
-   ![img_11.png](speclib_profile_source_panel_hires.png)
+   ![Profile Source Panel HighRes](img/speclib_profile_source_panel_hires.png)
    
 3. You can compare profiles from the same raster image using a different sampling methods.
    Change the second relation to sample from ``enmap_berlin.bsq`` using a 3x3 Kernel mean profile.
-4. ![img_11.png](speclib_profile_source_panel_kernel3x3.png)
+4. ![Profile Source Panel Kernel 3x3](img/speclib_profile_source_panel_kernel3x3.png)
 
-## The Spectral Library Window
+## 4. The Spectral Library Window
 
 The Spectral Library window offers similar tools like the standard QGIS attribute 
 table and enhances it by views and features specific to spectral profiles.
 
-![img_8.png](speclib_slw_toolbar.png)
+![Spectral Library Widget Toolbar](img/speclib_slw_toolbar.png)
 
 - Activate and deactivate the different views to explore what they are used for 
-- Ensure that the *Edit mode* is activated ![img_5.png](img_5.png).
-### Table View 
+- Ensure that the *Edit mode* is activated ![Edit Mode icon](img/speclib_slw_editmode_icon.png).
+### 4.1. Table View 
 
-![img_6.png](img_6.png) The *Table View* can be used to modify profile attributes, for example the values in the *name* column.
+![img_6.png](img/speclib_slw_tableview_icon.png) The *Table View* can be used to modify profile attributes, for example the values in the *name* column.
 
-![img_9.png](speclib_slw_tableview_editmode.png)
+![img_9.png](img/speclib_slw_tableview_editmode.png)
 
-You may also use the field calculator ![field calculator](img_4.png) to values in the *name* field based on an expression.
-   
-![img_11.png](speclib_fieldcalculator.png)
+
+* You can add and remove layer fields ![img_6.png](img_6.png)
+* You can use the field calculator ![field calculator icon](img/speclib_slw_fieldcalculator_icon.png) to modify values in the *name* field using an expression.
+  ![Field Calculator example](img/speclib_fieldcalculator.png)
  
 QGIS tracks modifications in an internal buffer. Call *Save edits* to write modifications to the vector layer.
 Alternatively, you can reject modifications when leaving the edit mode. This will reset the vector layer to it's 
 last saved state.  
 
-![img_12.png](speclib_stop_editing.png)
+![Stop Editing Dialog](img/speclib_stop_editing.png)
 
-### Form View
+### 4.2. Form View
 
-![img_2.png](img_2.png) The *Form View* uses the widgets that have been specified in the 
+![Form View icon](img/speclib_slw_formview_icon.png) The *Form View* uses the widgets that have been specified in the 
 *layer properties* > *Attribute Form* to display attribute values. If can be used to display and
 (in edit mode) modify profiles in a JSON or table view.
    
 
-![img_10.png](speclib_slw_formview.png)
+![Form View example](img/speclib_slw_formview.png)
 
 
-### Profile Plot
+### 4.3. Profile Plot
 
-The *Profile Plot* displays spectral profiles. Toggle the ![img_15.png](img_15.png) icon to show or hide the plot 
-panel, e.g. to enlarge the attribute table if you focus on modifications of the attributes.  
+The *Profile Plot* displays spectral profiles. 
+Toggling the ![Profile View icon](img/speclib_slw_profileview_icon.png) icon shows or hides the plot 
+panel. This can be useful, for example to enlarge the attribute table and focus on attribute modifications.  
 
-### Plot Settings
+You can adjust the extent of the visualized data range
+* in the plot context menu 
+  ![Profile Plot Context Menu](img/speclib_plot_context_menu.png)
 
-![img.png](img.png) The *Plot settings* control the profile visualization.
+* using the mouse cursor while with keeping the right mouse button pressed (try it!)
+
+* using the *Auto Scale* button in the lower-left plot corner
+  ![Profile Plot Autoscale Button](img/speclib_profile_plot_autoscale_button.png)
+
+You can export the entire plot scene or visible view box using the *context menu* > *Export*
+
+![Profile Plot export](img/speclib_profile_plot_export.png)
+
+### 4.4. Plot Settings
+
+![Plot Settings icon](img/speclib_slw_plotsettings_icon.png) The *Plot settings* control the profile visualization.
 You can define multiple visualization groups that described how profiles from a specific field and with specific attributes
 should be visualized. 
 
+![Vegetation profiles](img/speclib_slw_vegetation_profiles.png)
+
 1. Open a second spectral library viewer that displays the ``library_berlin.gpkg``
    Go to the Data Source panel, open the ``library_berlin.gpkg`` context menu  and click *Open Spectral Library Viewer*
-2. Open the *Plot Settings* ![img.png](img.png) 
-3. Open the Plot Settings
-4. Rename the name of the default visualization group to *vegetation* (double-click into the name)
-5. Set a filter expression to show vegetation profiles only, e.g. ``"level_1" = 'vegetation'``
-   ![img_9.png](img_9.png)
-6. Change the profile color to green
-
-   ![img_10.png](img_10.png)
-
-7. Add a second visualization group ![img_11.png](speclib_profile_source_panel_addrelation.png) for `impervious surfaces`, using a red color.
-
-   ![img_12.png](img_12.png)
+2. Open the *Plot Settings* ![Plot Settings icon](img/speclib_slw_plotsettings_icon.png)
+3. Rename the name of the default visualization group to *vegetation* (double-click into the name)
+4. Set a filter expression to show vegetation profiles only, e.g. ``"level_1" = 'vegetation'``
+   ![Profile filter](img/speclib_slw_profilefilter_example.png)
+5. Change the profile color to green
+6. Add a second visualization group ![Add Visualization Group](img/speclib_green_plus_icon.png) for `impervious surfaces`, using a red color.
+   ![Two visualization groups](img/speclib_slw_veg_and_impervious_example.png)
 
 
+## 5. Load and Save Spectral Libraries
 
-## 6. Save a Spectral Libraries
+Loading or Saving a spectral library means to load or save vector files.
 
-Saving a spectral library means to save a vector file.
+- You can load any vector source in the *Data Source Panel* into a *Spectral Library Viewer*
+  ![Open vector layer in speclib viewer](img/speclib_datasourcepanel_open_speclib_viewer.png)
+  
+  The vector layer does not need to contain any Spectral Profile fields. You can add or define them afterwards.
 
-In case your spectral library already uses a file backend, this is done when closing the edit mode.
+- If your spectral library uses an in-memory vector layer backend, all data will be lost if the layer is closed. 
+  This is the case if the *Spectral Library Viewer* was opened from *scratch* with an empty spectral library 
+  ![Scratch Speclib Viewer icon](img/speclib_slw_scratch_icon.png). In this case, don't forget to export collected profiles before 
+  closing the Spectral Library Viewer.
 
-Note that layer or style specific modifications may require to save them in a *.qml file. This can be done 
-openning the layer properties > *Symbology* > *Style* > *Save Default*
+- If your spectral library already uses a file backend (e.g. *.gpkg, *.geojson)
 
-![img_11.png](speclib_properties_save_default.png)
+Style and other layer specific information are not saved in the data source file, but the QGIS project or a QGIS specific
+sidecar *.qml file. Open the layer properties > *Symbology* > *Style* > *Save Default* to create or update the *.qml 
+file and ensure that the *Spectral Profile* fields will be restored when re-opening the data set.
 
-In case your spectral library uses the in-memory data provider 
-(this is the case when opening a new spectral library window), you need to export it into a file format first.
-This is preferably done by exporting 1. Open the export dialog 
- the entire library as Geopackage (*.gpkg) file.   
+![Save as Default context menu](img/speclib_properties_save_default.png)
 
-## 7. Export profiles
+
+## 6. Export profiles
 
 The Export dialog allows you to export all or selected profiles as
 Geopackage (*.gpkg), GeoJSON (*.geoson) or ENVI Spectral Library (*.sli).
 
-The ENVI Spectral Library does not allow to save profiles together that differ in their number of bands.
-In that case, a file will be generated for each profile field and for each unique setting wavelength and wavelength units.  
+The ENVI Spectral Library does not allow saving profiles with different spectral settings 
+(number of bands, wavelenght units, FWHM, ...) in the same file. In such cases and of profiles are stored in 
+multiple fields, the export generates multiple ENVI files. 
 
-## 8. Import profiles
+## 7. Import profiles
 
-![](speclib_import_icon.png) The Import Dialog allows you to import profile from different file types
+![Icon import profiles](img/speclib_import_icon.png) The Import Dialog is used to load profiles from none-vector files into an existing
+spectral library.
 
 1. Open a new "empty" spectral library window
 2. Activate the edit mode and remove the "profiles" field
 3. Open the import dialog 
 4. Select "ASD Field Spectrometer"
 5. Select the ASD files in ``Data_Part_II\ASD``
-   
-   So far, the source files contain more attributes than we define in our spectral library. 
-   Add the *Reference* and the *Spectrum* field using the *Copy missing source fields* dialog
-6. Now define how attribute values from the source, i.e. each single ``*.asd`` file, will be mapped to attribute 
-   in the spectral library. Press *Ok* to import the ASD file profiles.
-7. Add the libary to the map canvas to visualize the GPS positions
+
+  
+
+   The source files contain more attributes than we have defined in our spectral library. 
+   Add the *Reference* and the *Spectrum* field using the *Copy missing source fields* dialog.
+
+6. Define how source attributes, i.e. attributes of a single ``*.asd`` file are mapped to 
+   attributes of the spectral library. Press *Ok* to import the ASD file profiles.
+7. Add the library to the map canvas to visualize the GPS positions
 8. Finally, use the plot settings menu to give reference and spectrum profiles a different color
    
-   ![img_11.png](speclib_import_asd.png)
-## 9. Spectral profiles (advanced)
+   ![Example imported ASD profiles](img/speclib_import_asd.png)
+
+## 8. Spectral Profile JSON format
 
 The EnMAP-Box stores the minimum data to plot a single profile in a JSON object. 
 In its most simple way, this JSON object contains a single array "y" of length n, with n = number of spectral 
@@ -236,12 +278,23 @@ As JSON objet, a single hyperspectral EnMAP profile may therefore look like:
 
 Note that conceptually profile objects can differ in its wavelength etc.
 
+## 9. Create/Modify Profiles with spectralMath
 
-## 2 how to make a vector layer a Spectral Library
+As you already know, the *Field Calculator* allows to modify attribute values of all or selected
+features (aka *rows*).
 
+We can use it to modify spectral profiles as well:
 
+1. Open the *Table View* and activate the layer *Edit mode*
+2. Create a new 
+You may also use the field calculator ![field calculator icon](img/speclib_slw_fieldcalculator_icon.png) to values in the *name* field based on an expression.
+   
+![Field Calculator example](img/speclib_fieldcalculator.png)
+ 
+QGIS tracks modifications in an internal buffer. Call *Save edits* to write modifications to the vector layer.
+Alternatively, you can reject modifications when leaving the edit mode. This will reset the vector layer to it's 
+last saved state.  
 
-## 3. Import Spectral Profiles measured in field
+## 10. Create/Modify profiles with raster processing models
 
-
-## 4. Save the spectral library 
+tbd.
