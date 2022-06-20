@@ -2,7 +2,7 @@
 
 This tutorial shows example on how the EnMAP-Box can be used to manage Spectral Libraries.
 
-## Requirements:
+## Requirements
 
 * QGIS 3.24+ 
 * EnMAP.Box 3.10.+
@@ -16,27 +16,32 @@ Some exercises use ASD Field Spectrometer binary files (*.asd), which are locate
 in this repository in ``enmapbox-training/EARSeL2022/Data_Part_II``. You can
 
 * cloning this repository ``git clone git@github.com:EnMAP-Box/enmapbox-training.git``, or
-* download it from https://github.com/EnMAP-Box/enmapbox-training/archive/refs/heads/main.zip
+* download it from [https://github.com/EnMAP-Box/enmapbox-training/archive/refs/heads/main.zip](https://github.com/EnMAP-Box/enmapbox-training/archive/refs/heads/main.zip)
 
 It is furthermore recommended to disable other QGIS plugins.
-An easy way to do so is to create a new QGIS profile "enmap-box tutorial"
+An easy way to do so is creating a new QGIS profile "enmap-box tutorial" and installing a fresh EnMAP-Box installation
+into.
+
+![Create new user profile](img/speclib_create_new_user_profile.png)
+
 
 
 ## 1. Collecting profiles
 
-1. Open the EnMAP-Box
-2. Open an EnMAP image / any other raster image
-3. Activate the *Identify* map tool and it's option to collect *Profiles* 
+1. Open the EnMAP-Box and load the example data from *Project* > *Load Example Data*.
+
+   If not done automatically, open a new map view and add the ``enmap_berlin.bsq`` and ``hires_berlin.bsq`` to it.
+2. Activate the *Identify* map tool and it's option to collect *Profiles* 
    ![Indentify map tool bar](img/speclib_identify_toolbar.png)
 
-4. Click on a raster image pixel to open a new Spectral Library window and show the pixel profile.
+3. Click on a raster image pixel to open a new Spectral Library window and show the pixel profile.
 
    ![Example Pixel position and profile](img/speclib_profile_and_profile_location.png)
 
-5. Profiles obtained from pixel positions are considered as current or temporary *profile candidates*. 
+4. Profiles obtained from pixel positions are considered as current or temporary *profile candidates*. 
    Each time you click on a new pixels position, the last candidate will be replaced by the next one.
 
-6. Click on *Add profile(s)" to keep candidate profiles in the spectral library.
+5. Click on *Add profile(s)" to keep candidate profiles in the spectral library.
    You can activate "Add profiles automatically" to keep new profiles automatically
 
    ![Profiles and Profile Candidates](img/speclib_profiles_profilecandidates.png)
