@@ -85,7 +85,7 @@ This can be change in the *Spectral Profile Sources* panel, which allows you to 
 * the scaling of profile value
 
 1. Change the profile source to *enmap_berlin.bsq*. This way you will always collect profiles from the same image.
-   ![img_11.png](img/speclib_profile_source_panel_enmap_berlin.png)
+   ![Profile Source Panel EnMAP](img/speclib_profile_source_panel_enmap_berlin.png)
 
 2. In addition, open the map context menu *Crosshair* > *Pixel grid* and select the *enmap_berlin.bsq*. 
 
@@ -124,13 +124,20 @@ table and enhances it by views and features specific to spectral profiles.
 
 ### 4.1. Table View 
 
-![img_6.png](img/speclib_slw_tableview_icon.png) The *Table View* can be used to modify profile attributes, for example the values in the *name* column.
+![Table View icon](img/speclib_slw_tableview_icon.png) The *Table View* can be used to modify profile attributes, for example the values in the *name* column.
 
-![img_9.png](img/speclib_slw_tableview_editmode.png)
+![Edit mode icon](img/speclib_slw_tableview_editmode.png)
 
+Click on ![Add layer field icon](img/speclib_add_layer_field_icon.png) to add new layer fields.
+If you want to create a new profile field, 
+1. select a data type that allows to store profiles (e.g. text or binary fields) and 
+2. check *Use to store Spectral Profiles* used to store a spectral profile
+![Add field dialog](img/speclib_add_field_dialog.png)
 
-* You can add and remove layer fields ![img_6.png](img_6.png)
-* You can use the field calculator ![field calculator icon](img/speclib_slw_fieldcalculator_icon.png) to modify values in the *name* field using an expression.
+Click on ![img.png](img/speclib_remove_fields_icon.png) to remove layer fields.
+![img.png](img/speclib_remove_fields_dialog.png)
+
+You can use the field calculator ![field calculator icon](img/speclib_slw_fieldcalculator_icon.png) to modify values in the *name* field using an expression.
   ![Field Calculator example](img/speclib_fieldcalculator.png)
  
 QGIS tracks modifications in an internal buffer. Call *Save edits* to write modifications to the vector layer.
@@ -215,16 +222,20 @@ file and ensure that the *Spectral Profile* fields will be restored when re-open
 The Export dialog allows you to export all or selected profiles as
 Geopackage (*.gpkg), GeoJSON (*.geoson) or ENVI Spectral Library (*.sli).
 
+![Export as ENVI files](img/speclib_export_envi_dialog.png)
+
 The ENVI Spectral Library does not allow saving profiles with different spectral settings 
-(number of bands, wavelenght units, FWHM, ...) in the same file. In such cases and of profiles are stored in 
-multiple fields, the export generates multiple ENVI files. 
+(number of bands, wavelength units, FWHM, ...) in the same file. 
+Therefore, you need to select one (out of multiple) profile fields. 
+Profile with different spectral settings will be exported into different ENVI files. 
+
 
 ## 7. Import profiles
 
 ![Icon import profiles](img/speclib_import_icon.png) The Import Dialog is used to load profiles from none-vector files into an existing
 spectral library.
 
-1. Open a new "empty" spectral library window
+1. Open a new "empty" spectral library window 
 2. Activate the edit mode and remove the "profiles" field
 3. Open the import dialog 
 4. Select "ASD Field Spectrometer"
@@ -281,21 +292,57 @@ Note that conceptually profile objects can differ in its wavelength etc.
 
 ## 9. Create/Modify Profiles with spectralMath
 
-As you already know, the *Field Calculator* allows to modify attribute values of all or selected
+As you already know, the *Field Calculator* can modify attribute values of all or selected
 features (aka *rows*).
 
-We can use it to modify spectral profiles as well:
+We can use it to calculate spectral profiles as well:
 
 1. Open the *Table View* and activate the layer *Edit mode*
-2. Create a new 
-You may also use the field calculator ![field calculator icon](img/speclib_slw_fieldcalculator_icon.png) to values in the *name* field based on an expression.
+2. Create a new Spectral Profile field based on a text field called "Reflectance"
+   ![img.png](img/speclib_spectralmath_addfield_reflectance.png)
+3. Open the field calculator ![field calculator icon](img/speclib_slw_fieldcalculator_icon.png) 
+4. Use the ``spectralMath`` function to calculate reflectances from the ASD radiances measured 
+   from field spectra and its corresponding white reference.
+
+   ````python
+   spectralMath("<profile field 1>", ..., "<profile field n>",
+   '<python code>', '<output format>')
    
-![Field Calculator example](img/speclib_fieldcalculator.png)
- 
-QGIS tracks modifications in an internal buffer. Call *Save edits* to write modifications to the vector layer.
-Alternatively, you can reject modifications when leaving the edit mode. This will reset the vector layer to it's 
-last saved state.  
+   spectralMath("Spectrum",  "Reference",
+   'y = y1 / y2', 'text')
+   ````
+   
+   The last function argument defines the output format. As our "Reflectance" field is based on text field, 
+   we need to specify the function output as "text" as well. 
+    
+   ![img.png](img/speclib_spectralmath_fieldcalculator_example.png)
+
+5. Press "ok" to calculate the reflectance values.
+6. Hide the plot visualizations for "Reflectance" and "Spectrum" and auto-scale to the  
+   reflectance values within the range 0 to 1.
+
+   ![img.png](img/speclib_spectralmath_reflectancevalues.png)
+
 
 ## 10. Create/Modify profiles with raster processing models
+
+The Spectral Processing Dialog allows you to use raster processing algorithms to create 
+new profiles. The field values in our spectral library will be 
+
+1. Converted into artificial one-line raster images
+
+| Field Type       | Raster Size <br/>(band, height, n) | type                 |
+|------------------|-------------------------------|----------------------|
+| Spectral Profile | nb, 1, n                      | int / float          |
+| integer          | 1, 1, n                       | int                  |
+| float            | 1, 1, n                       | float                |
+| text             | 1, 1, n                       | int (classification) |
+
+
+2. The raster images are used as input to a processing algorithm
+3. Created raster outputs are converted back into spectral library field values 
+
+
+![Spectral Processing](img/speclib_spectralprocessing_scheme.png)
 
 tbd.
