@@ -13,20 +13,20 @@ Most exercises of this tutorial use the EnMAP-Box example data, which can be ope
 ![Load example data](img/enmapbox_load_exampledata.png)
 
 Some exercises use ASD Field Spectrometer binary files (*.asd), which are located 
-in this repository in ``enmapbox-training/EARSeL2022/Data_Part_II``. You can
+in this repository in ``enmapbox-training/EARSeL2022/Data_Part_II``. You may:
 
-* cloning this repository ``git clone git@github.com:EnMAP-Box/enmapbox-training.git``, or
+* clone this repository ``git clone git@github.com:EnMAP-Box/enmapbox-training.git``, or
 * download it from [https://github.com/EnMAP-Box/enmapbox-training/archive/refs/heads/main.zip](https://github.com/EnMAP-Box/enmapbox-training/archive/refs/heads/main.zip)
 
 It is furthermore recommended to disable other QGIS plugins.
-An easy way to do so is creating a new QGIS profile "enmap-box tutorial" and installing a fresh EnMAP-Box installation
-into.
+An easy way doing so is to create a new QGIS profile "enmap-box tutorial" and install a 
+fresh EnMAP-Box installation to.
 
 ![Create new user profile](img/speclib_create_new_user_profile.png)
 
 
 
-## 1. Collecting profiles
+## 1. Collect profiles
 
 1. Open the EnMAP-Box and load the example data from *Project* > *Load Example Data*.
 
@@ -39,10 +39,10 @@ into.
    ![Example Pixel position and profile](img/speclib_profile_and_profile_location.png)
 
 4. Profiles obtained from pixel positions are considered as current or temporary *profile candidates*. 
-   Each time you click on a new pixels position, the last candidate will be replaced by the next one.
+   The last profile candidate will be replaced by a new one each time you click on a new pixel position.
 
-5. Click on *Add profile(s)" to keep candidate profiles in the spectral library.
-   You can activate "Add profiles automatically" to keep new profiles automatically
+5. Click on *Add profile(s)* to keep candidate profiles in the spectral library.
+   You can activate *Add profiles automatically* to keep new profiles automatically in the spectral library.
 
    ![Profiles and Profile Candidates](img/speclib_profiles_profilecandidates.png)
  
@@ -64,13 +64,13 @@ its different properties:
   - *Attribute Form*: Which widget type is used for the *profiles* field?
 
 *Spectral Profiles* are stored in *binary* (BLOB) or *text* (VARCHAR) fields of unlimited length. 
-To use such fields for storing Spectral Profiles, the field editor 
-widget must be explicitly designated to the type *SpectralProfile*.
+These field types may be used for other purposes as well. To use them explicitly for Spectral Profiles, 
+the field editor widget type must be set to *SpectralProfile*.
 
 
 ![Attriubte Form Properties](img/speclib_attribute_form.png)
 
-Being a vector layer, we can add the spectral library to a map canvas to display the 
+Because EnMAP-Box spectral libraries are vector layers, we can add them to a map canvas and display the 
 positions of collected pixel profiles.
 
 1. Close the *Layer properties*
@@ -81,8 +81,8 @@ positions of collected pixel profiles.
 
 ## 3. Profile sources and pixel locations
 
-You may have recognized that, by default, the *Identify* tool selects profiles from top-most raster layer.
-This can be change in the *Spectral Profile Sources* panel, which allows you to define:
+The *Identify* tool selects profiles from top-most raster layer by default.
+The *Spectral Profile Sources* panel allows to change this behaviour and to control:
 
 * the profile source, i.e. the raster layer to collect profiles from
 * the style how they appear in the profile plot as profile candidate
@@ -98,8 +98,8 @@ This can be change in the *Spectral Profile Sources* panel, which allows you to 
 
    ![Crosshair Pixel Grid Canvas](img/speclib_crosshair_pixelgrid2.png)
 
-   Continue identifying pixel profiles by selecting locations using the *hires_berlin.bsq* as reference.
-   As alternative to the mouse you can use the following short-cuts to identify pixel profiles:
+3. Continue identifying pixel profiles by selecting locations using the *hires_berlin.bsq* as reference.
+   As an alternative to the mouse you may use the short-cuts to change the pixel positions:
 
    | Shortcut     | Action                                   | 
    |--------------|------------------------------------------|
@@ -108,48 +108,57 @@ This can be change in the *Spectral Profile Sources* panel, which allows you to 
    | CTRL + S     | Add the selected pixel profile candidate |
 
 
-It is possible to collect and compare profiles from different raster sources at the same time.
+It is possible to collect and compare profiles from different raster sources at the same time:
+
 1. Add a second profile source relation ![Green Plus icon](img/speclib_green_plus_icon.png)
 2. Use ```hires_berlin.bsq``` as profile source and identify a profile for both images
+3. Collect new pixel profiles
+
    ![Profile Source Panel HighRes](img/speclib_profile_source_panel_hires.png)
-   
-3. You can compare profiles from the same raster image using a different sampling methods.
-   Change the second relation to sample from ``enmap_berlin.bsq`` using a 3x3 Kernel mean profile.
-4. ![Profile Source Panel Kernel 3x3](img/speclib_profile_source_panel_kernel3x3.png)
+
+In a similar way you can compare profiles from the same raster image but using a different sampling methods.
+
+1. Change the second relation to sample from ``enmap_berlin.bsq`` using a 3x3 Kernel mean profile.
+2. Collect new pixel profiles
+   ![Profile Source Panel Kernel 3x3](img/speclib_profile_source_panel_kernel3x3.png)
 
 ## 4. The Spectral Library Window
 
-The Spectral Library window offers similar tools like the standard QGIS attribute 
-table and enhances it by views and features specific to spectral profiles.
+The Spectral Library window offers (almost) the same tools like the standard QGIS attribute 
+table. In addition, it provides views and features specifically to visualize and manage spectral profiles.
 
 ![Spectral Library Widget Toolbar](img/speclib_slw_toolbar.png)
 
-- Activate and deactivate the different views to explore what they are used for 
+- Toggle the buttons to show or hide the *Plot View*, *Plot Settings*, *Table View* and *Form View*
 - Ensure that the *Edit mode* is activated ![Edit Mode icon](img/speclib_slw_editmode_icon.png).
 
-### 4.1. Table View 
+### 4.1. <img src="img/speclib_slw_tableview_icon.png"> Table View 
 
-![Table View icon](img/speclib_slw_tableview_icon.png) The *Table View* can be used to modify profile attributes, for example the values in the *name* column.
+The *Table View* can be used to modify profile attributes. Use it (in edit mode) to change the values in 
+the *name* column.
 
 ![Edit mode icon](img/speclib_slw_tableview_editmode.png)
 
-Click on ![Add layer field icon](img/speclib_add_layer_field_icon.png) to add new layer fields.
-If you want to create a new profile field, 
-1. select a data type that allows to store profiles (e.g. text or binary fields) and 
-2. check *Use to store Spectral Profiles* used to store a spectral profile
-![Add field dialog](img/speclib_add_field_dialog.png)
+You can add further metadata fields:
 
-Click on ![img.png](img/speclib_remove_fields_icon.png) to remove layer fields.
-![img.png](img/speclib_remove_fields_dialog.png)
+1. Click the ![Add layer field icon](img/speclib_add_layer_field_icon.png) button to open the *Add Field* dialog.
+2. Select a data type that allows to store profiles (e.g. text or binary fields)
+3. Checking *Use to store Spectral Profiles* is a fast way to create a new profile field, as it will set 
+   the editor widget automatically to *Spectral Profile*.
+   ![Add field dialog](img/speclib_add_field_dialog.png)
+
+You can remove fields:
+
+1. Click on ![Remove fields icon](img/speclib_remove_fields_icon.png) to open the Remove Fields dialog.
+2. Select fields that you like to remove and press *Ok*   
 
 You can use the field calculator ![field calculator icon](img/speclib_slw_fieldcalculator_icon.png) to modify values in the *name* field using an expression.
   ![Field Calculator example](img/speclib_fieldcalculator.png)
  
-QGIS tracks modifications in an internal buffer. Call *Save edits* to write modifications to the vector layer.
-Alternatively, you can reject modifications when leaving the edit mode. This will reset the vector layer to it's 
-last saved state.  
-
-![Stop Editing Dialog](img/speclib_stop_editing.png)
+QGIS uses a transactional model to tracks modifications in an internal buffer. 
+* Call *Save edits* to write modifications to the vector layer's data source. 
+* To reject your modifications, stop the edit mode and click *No*.  
+  ![Stop Editing Dialog](img/speclib_stop_editing.png)
 
 ### 4.2. Form View
 
@@ -309,7 +318,7 @@ We can use it to calculate spectral profiles as well:
 4. Use the ``spectralMath`` function to calculate reflectances from the ASD radiances measured 
    from field spectra and its corresponding white reference.
 
-   ````python
+   ````bash
    spectralMath("<profile field 1>", ..., "<profile field n>",
    '<python code>', '<output format>')
    
@@ -336,12 +345,12 @@ new profiles. The field values in our spectral library will be
 
 1. Converted into artificial one-line raster images
 
-| Field Type       | Raster Size <br/>(band, height, n) | type                 |
-|------------------|-------------------------------|----------------------|
-| Spectral Profile | nb, 1, n                      | int / float          |
-| integer          | 1, 1, n                       | int                  |
-| float            | 1, 1, n                       | float                |
-| text             | 1, 1, n                       | int (classification) |
+| Field Type       | Raster Size <br/>(band, height, n)  | type                 |
+|------------------|-------------------------------------|----------------------|
+| Spectral Profile | nb, 1, n                            | int / float          |
+| integer          | 1, 1, n                             | int                  |
+| float            | 1, 1, n                             | float                |
+| text             | 1, 1, n                             | int (classification) |
 
 
 2. The raster images are used as input to a processing algorithm
