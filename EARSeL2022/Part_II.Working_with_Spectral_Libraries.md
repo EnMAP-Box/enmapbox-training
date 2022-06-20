@@ -121,6 +121,7 @@ table and enhances it by views and features specific to spectral profiles.
 
 - Activate and deactivate the different views to explore what they are used for 
 - Ensure that the *Edit mode* is activated ![Edit Mode icon](img/speclib_slw_editmode_icon.png).
+
 ### 4.1. Table View 
 
 ![img_6.png](img/speclib_slw_tableview_icon.png) The *Table View* can be used to modify profile attributes, for example the values in the *name* column.
