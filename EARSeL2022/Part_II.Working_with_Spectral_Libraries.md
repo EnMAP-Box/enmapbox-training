@@ -364,8 +364,9 @@ can be converted back into field values of the spectral library:
 | Raster Output        | Speclib Field Type |
 |----------------------|--------------------|
 | (>1, 1, n) int/float | Spectral Profile   |
-| (1, 1, n) integer    | integer            |
+| (1, 1, n) int        | int                |
 | (1, 1, n) float      | float              |
+
 
 This allows you to use the same algorithms to modify spectral profiles as you may want to use
 to manipulate raster images. Furthermore, you can make use 
