@@ -7,13 +7,16 @@ Part I: [Introduction to the EnMAP-Box](./EARSeL2022/Part_I.Introduction_to_the_
 
 Part II: [Working with Spectral Libraries](./EARSeL2022/Part_II.Working_with_Spectral_Libraries.md)
 
-## Other EnMAP-Box Resources
+## Other Resources
 
-Source Code: https://bitbucket.org/hu-geomatics/enmap-box
+EnMAP-Box Source Code: [https://bitbucket.org/hu-geomatics/enmap-box](https://bitbucket.org/hu-geomatics/enmap-box)
 
-Documentation: https://enmap-box.readthedocs.io
+EnMAP-Box Documentation: [https://enmap-box.readthedocs.io](https://bitbucket.org/hu-geomatics/enmap-box)
+
+QGIS User Guide: [https://docs.qgis.org/latest/en/docs/user_manual/index.html](https://docs.qgis.org/latest/en/docs/user_manual/index.html)
+
 
 # Contact
 
-enmapbox@enmap.org
+[enmapbox@enmap.org](https://bitbucket.org/hu-geomatics/enmap-box)
 

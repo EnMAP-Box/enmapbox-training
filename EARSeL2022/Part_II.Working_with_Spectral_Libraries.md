@@ -2,6 +2,7 @@
 
 This tutorial shows example on how the EnMAP-Box can be used to manage Spectral Libraries.
 
+
 ## Requirements
 
 * QGIS 3.24+ 
@@ -23,7 +24,6 @@ An easy way doing so is to create a new QGIS profile "enmap-box tutorial" and in
 fresh EnMAP-Box installation to.
 
 ![Create new user profile](img/speclib_create_new_user_profile.png)
-
 
 
 ## 1. Collect profiles
@@ -360,3 +360,12 @@ new profiles. The field values in our spectral library will be
 ![Spectral Processing](img/speclib_spectralprocessing_scheme.png)
 
 tbd.
+
+
+## References
+
+EnMAP-Box Source Code: [https://bitbucket.org/hu-geomatics/enmap-box](https://bitbucket.org/hu-geomatics/enmap-box)
+
+EnMAP-Box Documentation: [https://enmap-box.readthedocs.io](https://bitbucket.org/hu-geomatics/enmap-box)
+
+QGIS User Guide: [https://docs.qgis.org/latest/en/docs/user_manual/index.html](https://docs.qgis.org/latest/en/docs/user_manual/index.html)
