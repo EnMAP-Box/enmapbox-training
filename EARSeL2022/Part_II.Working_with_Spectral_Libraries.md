@@ -338,12 +338,16 @@ We can use it to calculate spectral profiles as well:
    ![img.png](img/speclib_spectralmath_reflectancevalues.png)
 
 
-## 10. Create/Modify profiles with raster processing models
+## 10. <img src="img/speclib_spectralprocessing_icon.png"> Spectral Processing
 
-The Spectral Processing Dialog allows you to use raster processing algorithms to create 
-new profiles. The field values in our spectral library will be 
+### Concept
 
-1. Converted into artificial one-line raster images
+![Spectral Processing](img/speclib_spectralprocessing_scheme.png)
+
+The Spectral Processing framework allows you to use raster processing algorithms to create 
+new profiles. Field values of your spectral library will be 
+converted into artificial one-line raster images. In principally, this can be 
+done with most of the field types:
 
 | Field Type       | Raster Size <br/>(band, height, n)  | type                 |
 |------------------|-------------------------------------|----------------------|
@@ -353,13 +357,52 @@ new profiles. The field values in our spectral library will be
 | text             | 1, 1, n                             | int (classification) |
 
 
-2. The raster images are used as input to a processing algorithm
-3. Created raster outputs are converted back into spectral library field values 
+These temporary raster images are input to standard QGIS processing 
+algorithms or QGIS processing models. If they generate raster outputs, these outputs
+can be converted back into field values of the spectral library: 
 
+| Raster Output        | Speclib Field Type |
+|----------------------|--------------------|
+| (>1, 1, n) int/float | Spectral Profile   |
+| (1, 1, n) integer    | integer            |
+| (1, 1, n) float      | float              |
 
-![Spectral Processing](img/speclib_spectralprocessing_scheme.png)
+This allows you to use the same algorithms to modify spectral profiles as you may want to use
+to manipulate raster images. Furthermore, you can make use 
+the QGIS model builder to create (potentially very large and complex) models and use them for
+both, spectral libraries and raster image processing.
 
-tbd.
+# Example
+
+1. Open the ```library_berlin.gpkg``` in a Spectral Library Viewer
+2. Activate the layer *Edit mode*.
+3. Open the *Spectral Processing Dialog* ![](img/speclib_spectralprocessing_icon.png)
+   - select *Spectral Resampling to Landsat8* (`enmapbox:SpectralResamplingToLandsat89Oli`) 
+     as processing algorithm
+   - select *profiles (177 bands, Micrometer)* as input. These profiles
+     will be converted into a single line raster image with 177 bands.
+   - define the field where to write outputs to. Either select an existing field 
+     or type the name of a new one.
+   
+   ![Spectral Processing Dialog](img/speclib_spectralprocessing_dialog.png)![]()
+
+4. Press *Ok* to start the processing.
+
+   (Bug notice: run this step twice)
+
+5. Close the Spectral Processing Dialog, open the plot settings and visualize the 
+   resampled *Landsat* profiles.
+
+   ![img.png](img/speclib_spectralprocessing_landsat.png)
+
+## Caveats & Limitations
+
+- to create new or modify existing profile, the spectral processing approach requires
+  raster outputs of same height and width as used for input images.
+
+- spectral processing can be started for a single spectral setting per spectral profile field only.
+  Assuming you have a field *profiles* which contains two types of profiles with 177 bands and (ii)
+
 
 
 ## References
